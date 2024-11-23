@@ -120,4 +120,19 @@ public class GameService {
         List<Game> games = gameRepository.findByName(name);
         return games.stream().map(this::convertToDTO).collect(Collectors.toList());
     }
+
+    public List<GameResponseDTO> getGamesByGenre(String genre) {
+        List<Game> games = gameRepository.findByGenre(genre);
+        return games.stream().map(this::convertToDTO).collect(Collectors.toList());
+    }
+
+    public List<GameResponseDTO> getGamesByPublisher(String publisher) {
+        List<Game> games = gameRepository.findByPublisherName(publisher);
+        return games.stream().map(this::convertToDTO).collect(Collectors.toList());
+    }
+
+    public List<GameResponseDTO> getGamesByCategory(String category) {
+        List<Game> games = gameRepository.findByCategoryType(category);
+        return games.stream().map(this::convertToDTO).collect(Collectors.toList());
+    }
 }

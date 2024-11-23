@@ -30,6 +30,21 @@ public class GameController {
         return gameService.getGamesByName(nom);
     }
 
+    @GetMapping("/search/publisher")
+    public List<GameResponseDTO> getGamesByPublisher(@RequestParam String publisher) {
+        return gameService.getGamesByPublisher(publisher);
+    }
+
+    @GetMapping("/search/category")
+    public List<GameResponseDTO> getGameByCategory(@RequestParam String category) {
+        return gameService.getGamesByCategory(category);
+    }
+
+    @GetMapping("/search/genre")
+    public List<GameResponseDTO> getGameByGenre(@RequestParam String genre) {
+        return gameService.getGamesByGenre(genre);
+    }
+
     @PostMapping
     public void ajouterJeu(@RequestBody GameDTO gameDTO) {
         try {
