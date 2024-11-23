@@ -2,11 +2,11 @@ package com.gamesUP.gamesUP.DTO.Purchase;
 
 import lombok.Data;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Data
 public class PurchaseDTO {
-    private LocalDateTime date;
+    private LocalDate date;
     private Boolean paid;
     private Boolean delivered;
     private Boolean archived;

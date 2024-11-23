@@ -53,6 +53,7 @@ public class InventoryService {
     private InventoryResponseDTO convertToDTO(Inventory inventory) {
         InventoryResponseDTO dto = new InventoryResponseDTO();
         dto.setId(inventory.getId());
+        dto.setGameId(inventory.getGame().getId());
         dto.setQuantity(inventory.getQuantity());
         return dto;
     }

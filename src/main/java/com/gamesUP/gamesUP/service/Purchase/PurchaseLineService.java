@@ -86,8 +86,8 @@ public class PurchaseLineService {
     private PurchaseLineResponseDTO convertToDTO(PurchaseLine purchaseLine) {
         PurchaseLineResponseDTO dto = new PurchaseLineResponseDTO();
         dto.setId(purchaseLine.getId());
-        purchaseLine.setPurchase(purchaseRepository.findById(dto.getPurchaseId()).orElse(null));
-        purchaseLine.setGame(gameRepository.findById(dto.getGameId()).orElse(null));
+        dto.setPurchaseId(purchaseLine.getPurchase().getId());
+        dto.setGameId(purchaseLine.getGame().getId());
         dto.setPrix(purchaseLine.getPrix());
         return dto;
     }

@@ -2,6 +2,7 @@ package com.gamesUP.gamesUP.model.Game;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.NoArgsConstructor;
@@ -15,6 +16,7 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 public class Category {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,6 +25,6 @@ public class Category {
 	@NotNull(message = "Le type est obligatoire")
 	private String type;
 
-	@OneToMany(mappedBy = "category")
-	private List<Game> games;
+/*	@OneToMany(mappedBy = "category")
+	private List<Game> games;*/
 }

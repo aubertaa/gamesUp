@@ -84,8 +84,8 @@ public class WishlistService {
     private WishlistResponseDTO convertToDTO(Wishlist wishList) {
         WishlistResponseDTO dto = new WishlistResponseDTO();
         dto.setId(wishList.getId());
-        wishList.setUser(userRepository.findById(dto.getUserId()).orElse(null));
-        wishList.setGame(gameRepository.findById(dto.getGameId()).orElse(null));
+        dto.setUserId(wishList.getUser().getId());
+        dto.setGameId(wishList.getGame().getId());
         return dto;
     }
 }
