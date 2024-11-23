@@ -15,8 +15,7 @@ public interface GameRepository extends JpaRepository<Game, Long> {
 
     List<Game> findByGenre(String genre);
 
-    List<Game> findByPublisher(String publisher);
+    List<Game> findByPublisherName(String publisher);
 
-    List<Game> findByCategory(String category);
-
+    List<Game> findByCategoryType(String category);
 }
