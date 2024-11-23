@@ -7,8 +7,6 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @Entity
 @Table(name = "authors", uniqueConstraints = {
         @UniqueConstraint(columnNames = "name")
@@ -25,6 +23,4 @@ public class Author {
     @NotNull(message = "Le nom est obligatoire")
     private String name;
 
-/*    @OneToMany(mappedBy = "author")
-    private List<Game> games;*/
 }

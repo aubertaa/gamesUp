@@ -7,8 +7,6 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @Entity
 @Table(name = "categories", uniqueConstraints = {
 		@UniqueConstraint(columnNames = "type")
@@ -25,6 +23,4 @@ public class Category {
 	@NotNull(message = "Le type est obligatoire")
 	private String type;
 
-/*	@OneToMany(mappedBy = "category")
-	private List<Game> games;*/
 }
