@@ -1,5 +1,7 @@
-package com.gamesUP.gamesUP.model;
+package com.gamesUP.gamesUP.model.User;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.gamesUP.gamesUP.model.Game.Game;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -13,6 +15,7 @@ import lombok.NoArgsConstructor;
 public class Avis {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@JsonIgnore
 	private Long id;
 
 	@ManyToOne

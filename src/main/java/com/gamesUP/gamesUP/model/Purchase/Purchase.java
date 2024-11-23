@@ -1,5 +1,6 @@
-package com.gamesUP.gamesUP.model;
+package com.gamesUP.gamesUP.model.Purchase;
 
+import com.gamesUP.gamesUP.model.User.User;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;

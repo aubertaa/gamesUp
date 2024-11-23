@@ -1,27 +1,28 @@
-package com.gamesUP.gamesUP.model;
+package com.gamesUP.gamesUP.model.User;
 
+import com.gamesUP.gamesUP.model.Game.Game;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "purchase_lines")
+@Table(name = "wish_list", uniqueConstraints = {
+        @UniqueConstraint(columnNames = "user_id")
+})
 @Getter
 @Setter
 @NoArgsConstructor
-public class PurchaseLine {
+public class Wishlist {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "purchase_id")
-    private Purchase purchase;
+    @JoinColumn(name = "user_id")
+    private User user;
 
     @ManyToOne
     @JoinColumn(name = "game_id")
     private Game game;
-
-    private Double prix;
 }

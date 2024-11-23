@@ -1,12 +1,15 @@
-package com.gamesUP.gamesUP.model;
+package com.gamesUP.gamesUP.model.Game;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "games")
+@Table(name = "games", uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"nom", "numEdition", "publisher_id"})
+})
 @Getter
 @Setter
 @NoArgsConstructor
@@ -15,6 +18,7 @@ public class Game {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotNull(message = "Le nom est obligatoire")
     private String nom;
     private String genre;
     private String numEdition;
