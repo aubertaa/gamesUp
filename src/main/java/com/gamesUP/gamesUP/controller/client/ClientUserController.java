@@ -1,35 +1,49 @@
-package com.gamesUP.gamesUP.controller.User;
+package com.gamesUP.gamesUP.controller.client;
 
+import com.gamesUP.gamesUP.DTO.User.AvisDTO;
+import com.gamesUP.gamesUP.DTO.User.UserDTO;
 import com.gamesUP.gamesUP.DTO.User.WishlistDTO;
 import com.gamesUP.gamesUP.DTO.User.WishlistResponseDTO;
 import com.gamesUP.gamesUP.Exceptions.EntityAlreadyExistException;
+import com.gamesUP.gamesUP.service.User.AvisService;
+import com.gamesUP.gamesUP.service.User.UserService;
 import com.gamesUP.gamesUP.service.User.WishlistService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
-@RequestMapping("/api/wishlists")
-public class WishlistController {
+@RequestMapping("/api/client/users")
+public class ClientUserController {
+    @Autowired
+    private UserService userService;
+
     @Autowired
     private WishlistService wishListService;
 
-    @PreAuthorize("hasRole('administrateur')")
-    @GetMapping
-    public List<WishlistResponseDTO> getAllWishlists() {
-        return wishListService.getAllWishlists();
+    @Autowired
+    private AvisService avisService;
+    
+    @PostMapping("/avis")
+    public void addAvis(@RequestBody AvisDTO avisDTO) {
+        avisService.addAvis(avisDTO);
+    }
+    
+    @PutMapping("/avis/{id}")
+    public void updateAvis(@PathVariable Long id, @RequestBody AvisDTO avisDTO) {
+        avisService.updateAvis(id, avisDTO);
+    }
+    
+    @PutMapping("/users/{id}")
+    public void updateUser(@PathVariable Long id, @RequestBody UserDTO userDTO) {
+        userService.updateUser(id, userDTO);
     }
 
-    @PreAuthorize("hasAnyRole('administrateur', 'client')")
-    @GetMapping("/{id}")
+    @GetMapping("/wishlists/{id}")
     public WishlistResponseDTO getWishlistById(@PathVariable Long id) {
         return wishListService.getWishlistById(id);
     }
 
-    @PreAuthorize("hasAnyRole('administrateur', 'client')")
-    @PostMapping
+    @PostMapping("/wishlists")
     public void addWishlist(@RequestBody WishlistDTO wishListDTO) {
         try {
             wishListService.addWishlist(wishListDTO);
@@ -38,15 +52,14 @@ public class WishlistController {
         }
     }
 
-    @PreAuthorize("hasAnyRole('administrateur', 'client')")
-    @PutMapping("/{id}")
+    @PutMapping("/wishlists/{id}")
     public void updateWishlist(@PathVariable Long id, @RequestBody WishlistDTO wishListDTO) {
         wishListService.updateWishlist(id, wishListDTO);
     }
 
-    @PreAuthorize("hasAnyRole('administrateur', 'client')")
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/wishlists/{id}")
     public void deleteWishlist(@PathVariable Long id) {
         wishListService.deleteWishlist(id);
     }
+
 }
