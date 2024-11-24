@@ -10,11 +10,11 @@ npm install -g @usebruno/cli
 
 ```bash
 cd '.\Not logged in testsuite\'
-bru run --reporter-html ../results_not_logged.html
+bru run --env localhost --reporter-html ../results_not_logged.html
 cd '..\Client logged in testsuite\'
-bru run --reporter-html ../results_client.html
+bru run --env localhost --reporter-html ../results_client.html
 cd '..\Admin logged in testsuite\'
-bru run --reporter-html ../results_admin.html
+bru run --env localhost --reporter-html ../results_admin.html
 cd '..'
 ```
 HTML reports will be generated in the root directory of tests ("integration_tests")
