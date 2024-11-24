@@ -1,0 +1,21 @@
+meta {
+  name: addPurchaseLine
+  type: http
+  seq: 7
+}
+
+post {
+  url: {{baseUrl}}/api/client/purchases/lines
+  body: json
+  auth: none
+}
+
+
+
+body:json {
+  {
+    "purchaseId": "1",
+    "gameId": "2",
+    "prix": "25"
+  }
+}

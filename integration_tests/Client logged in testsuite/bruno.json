@@ -1,0 +1,9 @@
+{
+  "version": "1",
+  "name": "Client logged in testsuite",
+  "type": "collection",
+  "ignore": [
+    "node_modules",
+    ".git"
+  ]
+}

@@ -1,0 +1,17 @@
+meta {
+  name: getInventoryById
+  type: http
+  seq: 6
+}
+
+get {
+  url: {{baseUrl}}/api/public/games/inventories/:id
+  body: none
+  auth: none
+}
+
+params:path {
+  id: 1
+}
+
+

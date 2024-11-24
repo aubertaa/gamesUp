@@ -1,0 +1,20 @@
+meta {
+  name: deleteUser
+  type: http
+  seq: 4
+}
+
+delete {
+  url: {{baseUrl}}/api/admin/users/:id
+  body: none
+  auth: basic
+}
+
+params:path {
+  id: 1
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}

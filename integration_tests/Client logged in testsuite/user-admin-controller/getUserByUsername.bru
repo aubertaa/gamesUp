@@ -1,0 +1,20 @@
+meta {
+  name: getUserByUsername
+  type: http
+  seq: 6
+}
+
+get {
+  url: {{baseUrl}}/api/admin/users/search/username?username=test
+  body: none
+  auth: basic
+}
+
+params:query {
+  username: test
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}

@@ -1,0 +1,30 @@
+meta {
+  name: updatePurchase
+  type: http
+  seq: 2
+}
+
+put {
+  url: {{baseUrl}}/api/client/purchases/:id
+  body: json
+  auth: basic
+}
+
+params:path {
+  id: 1
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+body:json {
+  {
+    "date": "2024-10-01",
+    "paid": "",
+    "delivered": "",
+    "archived": "",
+    "userId": "2"
+  }
+}

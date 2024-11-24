@@ -1,0 +1,24 @@
+meta {
+  name: ajouterJeu
+  type: http
+  seq: 11
+}
+
+post {
+  url: {{baseUrl}}/api/admin/games
+  body: json
+  auth: none
+}
+
+
+
+body:json {
+  {
+    "nom": "",
+    "genre": "",
+    "numEdition": "",
+    "authorName": "",
+    "categoryType": "",
+    "publisherName": ""
+  }
+}

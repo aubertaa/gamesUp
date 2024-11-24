@@ -1,0 +1,10 @@
+meta {
+  name: game-client-controller
+}
+
+tests {
+  test("should be successful", function() {
+    const data = res.getBody();
+    expect(res.getStatus()).to.equal(200);
+  });
+}

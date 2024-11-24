@@ -1,0 +1,26 @@
+meta {
+  name: updateAuthor
+  type: http
+  seq: 9
+}
+
+put {
+  url: {{baseUrl}}/api/admin/games/authors/:id
+  body: json
+  auth: basic
+}
+
+params:path {
+  id: 1
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+body:json {
+  {
+    "name": ""
+  }
+}

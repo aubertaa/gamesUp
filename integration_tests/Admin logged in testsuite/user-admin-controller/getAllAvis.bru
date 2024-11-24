@@ -1,0 +1,16 @@
+meta {
+  name: getAllAvis
+  type: http
+  seq: 8
+}
+
+get {
+  url: {{baseUrl}}/api/admin/users/avis
+  body: none
+  auth: basic
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}

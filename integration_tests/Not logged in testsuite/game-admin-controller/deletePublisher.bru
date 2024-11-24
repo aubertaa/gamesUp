@@ -1,0 +1,17 @@
+meta {
+  name: deletePublisher
+  type: http
+  seq: 4
+}
+
+delete {
+  url: {{baseUrl}}/api/admin/games/publishers/:id
+  body: none
+  auth: none
+}
+
+params:path {
+  id: 1
+}
+
+

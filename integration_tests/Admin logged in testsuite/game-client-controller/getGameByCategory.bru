@@ -1,0 +1,20 @@
+meta {
+  name: getGameByCategory
+  type: http
+  seq: 4
+}
+
+get {
+  url: {{baseUrl}}/api/client/games/search/category?category=RPG
+  body: none
+  auth: basic
+}
+
+params:query {
+  category: RPG
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}

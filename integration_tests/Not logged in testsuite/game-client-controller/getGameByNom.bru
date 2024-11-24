@@ -1,0 +1,17 @@
+meta {
+  name: getGameByNom
+  type: http
+  seq: 2
+}
+
+get {
+  url: {{baseUrl}}/api/client/games/search/name?nom=Portal
+  body: none
+  auth: none
+}
+
+params:query {
+  nom: Portal
+}
+
+

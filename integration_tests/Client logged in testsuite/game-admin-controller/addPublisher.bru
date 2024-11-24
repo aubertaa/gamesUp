@@ -1,0 +1,22 @@
+meta {
+  name: addPublisher
+  type: http
+  seq: 12
+}
+
+post {
+  url: {{baseUrl}}/api/admin/games/publishers
+  body: json
+  auth: basic
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+body:json {
+  {
+    "name": ""
+  }
+}

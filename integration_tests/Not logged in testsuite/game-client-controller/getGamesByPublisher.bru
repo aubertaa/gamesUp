@@ -1,0 +1,17 @@
+meta {
+  name: getGamesByPublisher
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/api/client/games/search/publisher?publisher=Valve
+  body: none
+  auth: none
+}
+
+params:query {
+  publisher: Valve
+}
+
+

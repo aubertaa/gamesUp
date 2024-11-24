@@ -1,0 +1,25 @@
+meta {
+  name: addUser
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{baseUrl}}/api/admin/users
+  body: json
+  auth: basic
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+body:json {
+  {
+    "nom": "",
+    "password": "",
+    "email": "",
+    "role": ""
+  }
+}

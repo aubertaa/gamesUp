@@ -1,0 +1,17 @@
+meta {
+  name: getUserByEmail
+  type: http
+  seq: 7
+}
+
+get {
+  url: {{baseUrl}}/api/admin/users/search/email?email=test
+  body: none
+  auth: none
+}
+
+params:query {
+  email: test
+}
+
+

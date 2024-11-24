@@ -1,0 +1,27 @@
+meta {
+  name: updateInventory
+  type: http
+  seq: 5
+}
+
+put {
+  url: {{baseUrl}}/api/admin/games/inventories/:id
+  body: json
+  auth: basic
+}
+
+params:path {
+  id: 
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+body:json {
+  {
+    "gameId": "",
+    "quantity": ""
+  }
+}

@@ -1,0 +1,27 @@
+meta {
+  name: updateWishlist
+  type: http
+  seq: 2
+}
+
+put {
+  url: {{baseUrl}}/api/client/users/wishlists/:id
+  body: json
+  auth: basic
+}
+
+params:path {
+  id: 1
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+body:json {
+  {
+    "userId": "1",
+    "gameId": "2"
+  }
+}

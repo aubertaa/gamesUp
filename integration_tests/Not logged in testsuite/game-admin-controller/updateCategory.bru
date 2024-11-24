@@ -1,0 +1,23 @@
+meta {
+  name: updateCategory
+  type: http
+  seq: 7
+}
+
+put {
+  url: {{baseUrl}}/api/admin/games/categories/:id
+  body: json
+  auth: none
+}
+
+params:path {
+  id: 1
+}
+
+
+
+body:json {
+  {
+    "type": ""
+  }
+}

@@ -1,0 +1,16 @@
+meta {
+  name: getAllPurchases
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/api/admin/purchases
+  body: none
+  auth: basic
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}

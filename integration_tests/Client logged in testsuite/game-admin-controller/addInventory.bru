@@ -1,0 +1,23 @@
+meta {
+  name: addInventory
+  type: http
+  seq: 13
+}
+
+post {
+  url: {{baseUrl}}/api/admin/games/inventories
+  body: json
+  auth: basic
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+body:json {
+  {
+    "gameId": "",
+    "quantity": ""
+  }
+}

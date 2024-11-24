@@ -1,0 +1,10 @@
+meta {
+  name: game-admin-controller
+}
+
+tests {
+  test("should not fail", function() {
+    const data = res.getBody();
+    expect(res.getStatus()).not.to.equal(403);
+  });
+}

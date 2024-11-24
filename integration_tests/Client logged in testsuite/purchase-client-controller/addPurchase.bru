@@ -1,0 +1,26 @@
+meta {
+  name: addPurchase
+  type: http
+  seq: 6
+}
+
+post {
+  url: {{baseUrl}}/api/client/purchases
+  body: json
+  auth: basic
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+body:json {
+  {
+    "date": "2024-12-01",
+    "paid": "false",
+    "delivered": "false",
+    "archived": "false",
+    "userId": "1"
+  }
+}

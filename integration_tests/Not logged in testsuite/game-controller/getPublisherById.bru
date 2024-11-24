@@ -1,0 +1,17 @@
+meta {
+  name: getPublisherById
+  type: http
+  seq: 4
+}
+
+get {
+  url: {{baseUrl}}/api/public/games/publishers/:id
+  body: none
+  auth: none
+}
+
+params:path {
+  id: 1
+}
+
+

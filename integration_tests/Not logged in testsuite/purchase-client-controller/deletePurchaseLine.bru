@@ -1,0 +1,17 @@
+meta {
+  name: deletePurchaseLine
+  type: http
+  seq: 5
+}
+
+delete {
+  url: {{baseUrl}}/api/client/purchases/lines/:id
+  body: none
+  auth: none
+}
+
+params:path {
+  id: 1
+}
+
+

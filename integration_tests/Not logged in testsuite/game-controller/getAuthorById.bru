@@ -1,0 +1,17 @@
+meta {
+  name: getAuthorById
+  type: http
+  seq: 10
+}
+
+get {
+  url: {{baseUrl}}/api/public/games/authors/:id
+  body: none
+  auth: none
+}
+
+params:path {
+  id: 1
+}
+
+

@@ -1,0 +1,17 @@
+meta {
+  name: getGameByGenre
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{baseUrl}}/api/client/games/search/genre?genre=RPG
+  body: none
+  auth: none
+}
+
+params:query {
+  genre: RPG
+}
+
+

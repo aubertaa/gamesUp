@@ -1,0 +1,31 @@
+meta {
+  name: updateGame
+  type: http
+  seq: 1
+}
+
+put {
+  url: {{baseUrl}}/api/admin/games/:id
+  body: json
+  auth: basic
+}
+
+params:path {
+  id: 1
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+body:json {
+  {
+    "nom": "",
+    "genre": "",
+    "numEdition": "",
+    "authorName": "",
+    "categoryType": "",
+    "publisherName": ""
+  }
+}

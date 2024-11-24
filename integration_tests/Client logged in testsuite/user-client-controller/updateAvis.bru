@@ -1,0 +1,29 @@
+meta {
+  name: updateAvis
+  type: http
+  seq: 5
+}
+
+put {
+  url: {{baseUrl}}/api/client/users/avis/:id
+  body: json
+  auth: basic
+}
+
+params:path {
+  id: 1
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+body:json {
+  {
+    "userId": "1",
+    "gameId": "1",
+    "commentaire": "youpi",
+    "note": "7"
+  }
+}

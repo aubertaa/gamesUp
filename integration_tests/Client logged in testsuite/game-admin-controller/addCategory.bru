@@ -1,0 +1,22 @@
+meta {
+  name: addCategory
+  type: http
+  seq: 14
+}
+
+post {
+  url: {{baseUrl}}/api/admin/games/categories
+  body: json
+  auth: basic
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+body:json {
+  {
+    "type": ""
+  }
+}

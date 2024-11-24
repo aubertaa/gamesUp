@@ -1,0 +1,17 @@
+meta {
+  name: getAvisById
+  type: http
+  seq: 9
+}
+
+get {
+  url: {{baseUrl}}/api/admin/users/avis/:id
+  body: none
+  auth: none
+}
+
+params:path {
+  id: 1
+}
+
+

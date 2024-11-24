@@ -1,0 +1,10 @@
+meta {
+  name: user-client-controller
+}
+
+tests {
+  test("should fail", function() {
+    const data = res.getBody();
+    expect(res.getStatus()).to.equal(401);
+  });
+}

@@ -1,0 +1,16 @@
+meta {
+  name: getAllUsers
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/api/admin/users
+  body: none
+  auth: basic
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}

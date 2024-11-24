@@ -1,0 +1,19 @@
+meta {
+  name: addAuthor
+  type: http
+  seq: 15
+}
+
+post {
+  url: {{baseUrl}}/api/admin/games/authors
+  body: json
+  auth: none
+}
+
+
+
+body:json {
+  {
+    "name": ""
+  }
+}

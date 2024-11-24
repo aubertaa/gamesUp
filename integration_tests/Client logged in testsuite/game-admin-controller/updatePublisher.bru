@@ -1,0 +1,26 @@
+meta {
+  name: updatePublisher
+  type: http
+  seq: 3
+}
+
+put {
+  url: {{baseUrl}}/api/admin/games/publishers/:id
+  body: json
+  auth: basic
+}
+
+params:path {
+  id: 1
+}
+
+auth:basic {
+  username: {{username}}
+  password: {{password}}
+}
+
+body:json {
+  {
+    "name": ""
+  }
+}
