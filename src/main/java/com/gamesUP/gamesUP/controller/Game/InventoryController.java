@@ -4,6 +4,7 @@ import com.gamesUP.gamesUP.DTO.Game.InventoryDTO;
 import com.gamesUP.gamesUP.DTO.Game.InventoryResponseDTO;
 import com.gamesUP.gamesUP.service.Game.InventoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,16 +25,19 @@ public class InventoryController {
         return inventoryService.getInventoryById(id);
     }
 
+    @PreAuthorize("hasRole('administrateur')")
     @PostMapping
     public void addInventory(@RequestBody InventoryDTO inventoryDTO) {
             inventoryService.addInventory(inventoryDTO);
     }
 
+    @PreAuthorize("hasRole('administrateur')")
     @PutMapping("/{id}")
     public void updateInventory(@PathVariable Long id, @RequestBody InventoryDTO inventoryDTO) {
         inventoryService.updateInventory(id, inventoryDTO);
     }
 
+    @PreAuthorize("hasRole('administrateur')")
     @DeleteMapping("/{id}")
     public void deleteInventory(@PathVariable Long id) {
         inventoryService.deleteInventory(id);

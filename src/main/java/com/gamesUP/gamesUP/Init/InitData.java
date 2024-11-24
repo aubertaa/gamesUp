@@ -18,9 +18,11 @@ import com.gamesUP.gamesUP.repository.User.UserRepository;
 import com.gamesUP.gamesUP.repository.User.WishlistRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
+import java.util.Set;
 
 @Component
 public class InitData implements CommandLineRunner {
@@ -54,6 +56,9 @@ public class InitData implements CommandLineRunner {
 
     @Autowired
     private InventoryRepository inventoryRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public void run(String... args) throws Exception {
@@ -114,16 +119,21 @@ public class InitData implements CommandLineRunner {
 
 
         // --- USERS ---
+
         User user1 = new User(
                 null,
-                "Alice Johnson",
-                "alice@example.com"
+                "Correcteur Visiplus (client)",
+                passwordEncoder.encode("123456"),
+                "correcteur@example.com",
+                Set.of("client")
         );
 
         User user2 = new User(
                 null,
-                "Bob Williams",
-                "bob@example.com"
+                "Le grand chef (admin)",
+                passwordEncoder.encode("123456"),
+                "grandchef@example.com",
+                Set.of("administrateur")
         );
 
         userRepository.save(user1);

@@ -5,6 +5,7 @@ import com.gamesUP.gamesUP.DTO.Game.PublisherResponseDTO;
 import com.gamesUP.gamesUP.Exceptions.EntityAlreadyExistException;
 import com.gamesUP.gamesUP.service.Game.PublisherService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,6 +26,7 @@ public class PublisherController {
         return publisherService.getPublisherById(id);
     }
 
+    @PreAuthorize("hasRole('administrateur')")
     @PostMapping
     public void addPublisher(@RequestBody PublisherDTO publisherDTO) {
         try {
@@ -34,11 +36,13 @@ public class PublisherController {
         }
     }
 
+    @PreAuthorize("hasRole('administrateur')")
     @PutMapping("/{id}")
     public void updatePublisher(@PathVariable Long id, @RequestBody PublisherDTO publisherDTO) {
         publisherService.updatePublisher(id, publisherDTO);
     }
 
+    @PreAuthorize("hasRole('administrateur')")
     @DeleteMapping("/{id}")
     public void deletePublisher(@PathVariable Long id) {
         publisherService.deletePublisher(id);

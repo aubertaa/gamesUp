@@ -20,4 +20,10 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(errorResponse, HttpStatus.CONFLICT);
     }
 
+    @ExceptionHandler(RelationConstraintException.class)
+    public ResponseEntity<ErrorResponse> handleRelationConstraintException(RelationConstraintException ex) {
+        ErrorResponse errorResponse = new ErrorResponse(HttpStatus.FAILED_DEPENDENCY.value(), ex.getMessage());
+        return new ResponseEntity<>(errorResponse, HttpStatus.FAILED_DEPENDENCY);
+    }
+
 }

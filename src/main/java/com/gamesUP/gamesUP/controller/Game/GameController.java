@@ -5,6 +5,7 @@ import com.gamesUP.gamesUP.DTO.Game.GameResponseDTO;
 import com.gamesUP.gamesUP.Exceptions.EntityAlreadyExistException;
 import com.gamesUP.gamesUP.service.Game.GameService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,26 +26,31 @@ public class GameController {
         return gameService.getGameById(id);
     }
 
+    @PreAuthorize("hasAnyRole('administrateur', 'client')")
     @GetMapping("/search/name")
     public List<GameResponseDTO> getGameByNom(@RequestParam String nom) {
         return gameService.getGamesByName(nom);
     }
 
+    @PreAuthorize("hasAnyRole('administrateur', 'client')")
     @GetMapping("/search/publisher")
     public List<GameResponseDTO> getGamesByPublisher(@RequestParam String publisher) {
         return gameService.getGamesByPublisher(publisher);
     }
 
+    @PreAuthorize("hasAnyRole('administrateur', 'client')")
     @GetMapping("/search/category")
     public List<GameResponseDTO> getGameByCategory(@RequestParam String category) {
         return gameService.getGamesByCategory(category);
     }
 
+    @PreAuthorize("hasAnyRole('administrateur', 'client')")
     @GetMapping("/search/genre")
     public List<GameResponseDTO> getGameByGenre(@RequestParam String genre) {
         return gameService.getGamesByGenre(genre);
     }
 
+    @PreAuthorize("hasRole('administrateur')")
     @PostMapping
     public void ajouterJeu(@RequestBody GameDTO gameDTO) {
         try {
@@ -54,11 +60,13 @@ public class GameController {
         }
     }
 
+    @PreAuthorize("hasRole('administrateur')")
     @PutMapping("/{id}")
     public void updateGame(@PathVariable Long id, @RequestBody GameDTO gameDTO) {
         gameService.updateGame(id, gameDTO);
     }
 
+    @PreAuthorize("hasRole('administrateur')")
     @DeleteMapping("/{id}")
     public void deleteGame(@PathVariable Long id) {
         gameService.deleteGame(id);

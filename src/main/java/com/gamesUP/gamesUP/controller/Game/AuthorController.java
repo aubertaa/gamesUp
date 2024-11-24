@@ -5,6 +5,7 @@ import com.gamesUP.gamesUP.DTO.Game.AuthorResponseDTO;
 import com.gamesUP.gamesUP.Exceptions.EntityAlreadyExistException;
 import com.gamesUP.gamesUP.service.Game.AuthorService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,6 +26,7 @@ public class AuthorController {
         return authorService.getAuthorById(id);
     }
 
+    @PreAuthorize("hasRole('administrateur')")
     @PostMapping
     public void addAuthor(@RequestBody AuthorDTO authorDTO) {
         try {
@@ -34,11 +36,13 @@ public class AuthorController {
         }
     }
 
+    @PreAuthorize("hasRole('administrateur')")
     @PutMapping("/{id}")
     public void updateAuthor(@PathVariable Long id, @RequestBody AuthorDTO authorDTO) {
         authorService.updateAuthor(id, authorDTO);
     }
 
+    @PreAuthorize("hasRole('administrateur')")
     @DeleteMapping("/{id}")
     public void deleteAuthor(@PathVariable Long id) {
         authorService.deleteAuthor(id);

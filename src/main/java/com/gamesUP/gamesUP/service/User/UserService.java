@@ -7,16 +7,21 @@ import com.gamesUP.gamesUP.model.User.User;
 import com.gamesUP.gamesUP.repository.User.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
 public class UserService {
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     public List<UserResponseDTO> getAllUsers() {
         return userRepository.findAll().stream().map(this::convertToDTO).collect(Collectors.toList());
@@ -40,6 +45,8 @@ public class UserService {
     public void addUser(UserDTO userDTO) {
         User user = new User();
         user.setNom(userDTO.getNom());
+        user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
+        user.setRoles(Set.of(userDTO.getRole()));
         user.setEmail(userDTO.getEmail());
         userRepository.save(user);
     }
@@ -49,6 +56,8 @@ public class UserService {
         if (userOptional.isPresent()) {
             User user = userOptional.get();
             user.setNom(userDTO.getNom());
+            user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
+            user.setRoles(Set.of(userDTO.getRole()));
             userRepository.save(user);
         }
     }
@@ -65,7 +74,9 @@ public class UserService {
         UserResponseDTO dto = new UserResponseDTO();
         dto.setId(user.getId());
         dto.setNom(user.getNom());
+        dto.setPassword(user.getPassword()); //return hashed password
         dto.setEmail(user.getEmail());
+        dto.setRole(user.getRoles().iterator().next());
         return dto;
     }
 }
