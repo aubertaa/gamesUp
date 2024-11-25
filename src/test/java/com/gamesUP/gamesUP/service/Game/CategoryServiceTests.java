@@ -149,9 +149,7 @@ public class CategoryServiceTests {
         doThrow(new DataIntegrityViolationException("")).when(categoryRepository).deleteById(categoryId);
 
         // Act and Assert
-        Exception exception = assertThrows(RelationConstraintException.class, () -> {
-            categoryService.deleteCategory(categoryId);
-        });
+        Exception exception = assertThrows(RelationConstraintException.class, () -> categoryService.deleteCategory(categoryId));
 
         assertEquals("Cannot delete category, related entities exist.", exception.getMessage());
     }
