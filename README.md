@@ -2,7 +2,7 @@
 
 ## Architecture
 L’architecture est la suivante:
-![img.png](img.png)
+![img_2.png](img_2.png)
 
 ### Base de données
 La base de données utilisée est MySQL. (une base in memory H2 est utilisé pour les tests et la phase de développement)
