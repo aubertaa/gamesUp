@@ -9,10 +9,9 @@ import com.gamesUP.gamesUP.model.Game.Category;
 import com.gamesUP.gamesUP.model.Game.Game;
 import com.gamesUP.gamesUP.model.Game.Publisher;
 import com.gamesUP.gamesUP.repository.Game.AuthorRepository;
-import com.gamesUP.gamesUP.repository.Game.GameRepository;
 import com.gamesUP.gamesUP.repository.Game.CategoryRepository;
+import com.gamesUP.gamesUP.repository.Game.GameRepository;
 import com.gamesUP.gamesUP.repository.Game.PublisherRepository;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
@@ -105,9 +104,9 @@ public class GameService {
         dto.setNom(game.getNom());
         dto.setGenre(game.getGenre());
         dto.setNumEdition(game.getNumEdition());
-        dto.setAuthorName(game.getAuthor() != null ? game.getAuthor().getName() : null);
-        dto.setCategoryType(game.getCategory() != null ? game.getCategory().getType() : null);
-        dto.setPublisherName(game.getPublisher() != null ? game.getPublisher().getName() : null);
+        dto.setAuthorName(game.getAuthor().getName());
+        dto.setCategoryType(game.getCategory().getType());
+        dto.setPublisherName(game.getPublisher().getName());
         return dto;
     }
 
