@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>UserService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">gamesUP</a> &gt; <a href="index.source.html" class="el_package">com.gamesUP.gamesUP.service.User</a> &gt; <span class="el_source">UserService.java</span></div><h1>UserService.java</h1><pre class="source lang-java linenums">package com.gamesUP.gamesUP.service.User;
+
+import com.gamesUP.gamesUP.DTO.User.UserDTO;
+import com.gamesUP.gamesUP.DTO.User.UserResponseDTO;
+import com.gamesUP.gamesUP.Exceptions.RelationConstraintException;
+import com.gamesUP.gamesUP.model.User.User;
+import com.gamesUP.gamesUP.repository.User.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
+
+@Service
+<span class="fc" id="L19">public class UserService {</span>
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    public List&lt;UserResponseDTO&gt; getAllUsers() {
+<span class="fc" id="L27">        return userRepository.findAll().stream().map(this::convertToDTO).collect(Collectors.toList());</span>
+    }
+
+    public UserResponseDTO getUserById(Long id) {
+<span class="fc" id="L31">        Optional&lt;User&gt; user = userRepository.findById(id);</span>
+<span class="fc" id="L32">        return user.map(this::convertToDTO).orElse(null);</span>
+    }
+
+    public UserResponseDTO getUserByName(String name) {
+<span class="fc" id="L36">        Optional&lt;User&gt; user = userRepository.findByName(name);</span>
+<span class="fc" id="L37">        return user.map(this::convertToDTO).orElse(null);</span>
+    }
+
+    public UserResponseDTO getUserByEmail(String email) {
+<span class="fc" id="L41">        Optional&lt;User&gt; user = userRepository.findByEmail(email);</span>
+<span class="fc" id="L42">        return user.map(this::convertToDTO).orElse(null);</span>
+    }
+
+    public void addUser(UserDTO userDTO) {
+<span class="fc" id="L46">        User user = new User();</span>
+<span class="fc" id="L47">        user.setNom(userDTO.getNom());</span>
+<span class="fc" id="L48">        user.setPassword(passwordEncoder.encode(userDTO.getPassword()));</span>
+<span class="fc" id="L49">        user.setRoles(Set.of(userDTO.getRole()));</span>
+<span class="fc" id="L50">        user.setEmail(userDTO.getEmail());</span>
+<span class="fc" id="L51">        userRepository.save(user);</span>
+<span class="fc" id="L52">    }</span>
+
+    public void updateUser(Long id, UserDTO userDTO) {
+<span class="fc" id="L55">        Optional&lt;User&gt; userOptional = userRepository.findById(id);</span>
+<span class="fc bfc" id="L56" title="All 2 branches covered.">        if (userOptional.isPresent()) {</span>
+<span class="fc" id="L57">            User user = userOptional.get();</span>
+<span class="fc" id="L58">            user.setNom(userDTO.getNom());</span>
+<span class="fc" id="L59">            user.setPassword(passwordEncoder.encode(userDTO.getPassword()));</span>
+<span class="fc" id="L60">            user.setRoles(Set.of(userDTO.getRole()));</span>
+<span class="fc" id="L61">            userRepository.save(user);</span>
+        }
+<span class="fc" id="L63">    }</span>
+
+    public void deleteUser(Long id) {
+        try {
+<span class="fc" id="L67">            userRepository.deleteById(id);</span>
+<span class="fc" id="L68">        } catch (DataIntegrityViolationException ex) {</span>
+<span class="fc" id="L69">            throw new RelationConstraintException(&quot;Cannot delete user, related entities exist.&quot;);</span>
+<span class="fc" id="L70">        }</span>
+<span class="fc" id="L71">    }</span>
+
+    private UserResponseDTO convertToDTO(User user) {
+<span class="fc" id="L74">        UserResponseDTO dto = new UserResponseDTO();</span>
+<span class="fc" id="L75">        dto.setId(user.getId());</span>
+<span class="fc" id="L76">        dto.setNom(user.getNom());</span>
+<span class="fc" id="L77">        dto.setPassword(user.getPassword()); //return hashed password</span>
+<span class="fc" id="L78">        dto.setEmail(user.getEmail());</span>
+<span class="fc" id="L79">        dto.setRole(user.getRoles().iterator().next());</span>
+<span class="fc" id="L80">        return dto;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

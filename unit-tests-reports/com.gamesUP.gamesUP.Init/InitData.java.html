@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>InitData.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">gamesUP</a> &gt; <a href="index.source.html" class="el_package">com.gamesUP.gamesUP.Init</a> &gt; <span class="el_source">InitData.java</span></div><h1>InitData.java</h1><pre class="source lang-java linenums">package com.gamesUP.gamesUP.Init;
+
+import com.gamesUP.gamesUP.model.Game.Author;
+import com.gamesUP.gamesUP.model.Game.Category;
+import com.gamesUP.gamesUP.model.Game.Game;
+import com.gamesUP.gamesUP.model.Game.Publisher;
+import com.gamesUP.gamesUP.model.Game.Inventory;
+import com.gamesUP.gamesUP.model.Purchase.Purchase;
+import com.gamesUP.gamesUP.model.Purchase.PurchaseLine;
+import com.gamesUP.gamesUP.model.User.Avis;
+import com.gamesUP.gamesUP.model.User.User;
+import com.gamesUP.gamesUP.model.User.Wishlist;
+import com.gamesUP.gamesUP.repository.Game.*;
+import com.gamesUP.gamesUP.repository.Purchase.PurchaseLineRepository;
+import com.gamesUP.gamesUP.repository.Purchase.PurchaseRepository;
+import com.gamesUP.gamesUP.repository.User.AvisRepository;
+import com.gamesUP.gamesUP.repository.User.UserRepository;
+import com.gamesUP.gamesUP.repository.User.WishlistRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Component;
+
+import java.time.LocalDate;
+import java.util.Set;
+
+@Component
+<span class="fc" id="L28">public class InitData implements CommandLineRunner {</span>
+
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private GameRepository gameRepository;
+
+    @Autowired
+    private WishlistRepository wishlistRepository;
+
+    @Autowired
+    private AuthorRepository authorRepository;
+
+    @Autowired
+    private CategoryRepository categoryRepository;
+
+    @Autowired
+    private PublisherRepository publisherRepository;
+
+    @Autowired
+    private AvisRepository avisRepository;
+
+    @Autowired
+    private PurchaseRepository purchaseRepository;
+
+    @Autowired
+    private PurchaseLineRepository purchaseLineRepository;
+
+    @Autowired
+    private InventoryRepository inventoryRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    @Override
+    public void run(String... args) throws Exception {
+
+        // --- GAMES ---
+<span class="fc" id="L67">        Author author1 = new Author(null, &quot;John Smith&quot;);</span>
+<span class="fc" id="L68">        Author author2 = new Author(null, &quot;Jane Doe&quot;);</span>
+<span class="fc" id="L69">        authorRepository.save(author1);</span>
+<span class="fc" id="L70">        authorRepository.save(author2);</span>
+
+<span class="fc" id="L72">        Category category1 = new Category(null, &quot;Action&quot;);</span>
+<span class="fc" id="L73">        Category category2 = new Category(null, &quot;Adventure&quot;);</span>
+<span class="fc" id="L74">        categoryRepository.save(category1);</span>
+<span class="fc" id="L75">        categoryRepository.save(category2);</span>
+
+<span class="fc" id="L77">        Publisher publisher1 = new Publisher(null, &quot;Epic Games&quot;);</span>
+<span class="fc" id="L78">        Publisher publisher2 = new Publisher(null, &quot;Valve&quot;);</span>
+<span class="fc" id="L79">        publisherRepository.save(publisher1);</span>
+<span class="fc" id="L80">        publisherRepository.save(publisher2);</span>
+
+<span class="fc" id="L82">        Game game1 = new Game(</span>
+                null,
+                &quot;Fortnite&quot;,
+                &quot;Battle Royale&quot;,
+                &quot;3.1&quot;,
+                author1,
+                category1,
+                publisher1
+        );
+
+<span class="fc" id="L92">        Game game2 = new Game(</span>
+                null,
+                &quot;Portal&quot;,
+                &quot;Puzzle&quot;,
+                &quot;1&quot;,
+                author2,
+                category2,
+                publisher2
+        );
+
+<span class="fc" id="L102">        gameRepository.save(game1);</span>
+<span class="fc" id="L103">        gameRepository.save(game2);</span>
+
+<span class="fc" id="L105">        Inventory inventory1 = new Inventory(</span>
+                null,
+                game1,
+<span class="fc" id="L108">                100</span>
+        );
+
+<span class="fc" id="L111">        Inventory inventory2 = new Inventory(</span>
+                null,
+                game2,
+<span class="fc" id="L114">                50</span>
+        );
+
+<span class="fc" id="L117">        inventoryRepository.save(inventory1);</span>
+<span class="fc" id="L118">        inventoryRepository.save(inventory2);</span>
+
+
+        // --- USERS ---
+
+<span class="fc" id="L123">        User user1 = new User(</span>
+                null,
+                &quot;Correcteur Visiplus (client)&quot;,
+<span class="fc" id="L126">                passwordEncoder.encode(&quot;123456&quot;),</span>
+                &quot;correcteur@example.com&quot;,
+<span class="fc" id="L128">                Set.of(&quot;client&quot;)</span>
+        );
+
+<span class="fc" id="L131">        User user2 = new User(</span>
+                null,
+                &quot;Le grand chef (admin)&quot;,
+<span class="fc" id="L134">                passwordEncoder.encode(&quot;123456&quot;),</span>
+                &quot;grandchef@example.com&quot;,
+<span class="fc" id="L136">                Set.of(&quot;administrateur&quot;)</span>
+        );
+
+<span class="fc" id="L139">        userRepository.save(user1);</span>
+<span class="fc" id="L140">        userRepository.save(user2);</span>
+
+        // --- PURCHASES ---
+<span class="fc" id="L143">        Purchase purchase1 = new Purchase(</span>
+                null,
+<span class="fc" id="L145">                LocalDate.now().minusDays(10),</span>
+<span class="fc" id="L146">                true,</span>
+<span class="fc" id="L147">                true,</span>
+<span class="fc" id="L148">                false,</span>
+                user1
+        );
+
+<span class="fc" id="L152">        Purchase purchase2 = new Purchase(</span>
+                null,
+<span class="fc" id="L154">                LocalDate.now().minusDays(8),</span>
+<span class="fc" id="L155">                false,</span>
+<span class="fc" id="L156">                false,</span>
+<span class="fc" id="L157">                false,</span>
+                user2
+        );
+
+<span class="fc" id="L161">        Purchase purchase3 = new Purchase(</span>
+                null,
+<span class="fc" id="L163">                LocalDate.now().minusDays(5),</span>
+<span class="fc" id="L164">                false,</span>
+<span class="fc" id="L165">                false,</span>
+<span class="fc" id="L166">                false,</span>
+                user1
+        );
+
+<span class="fc" id="L170">        purchaseRepository.save(purchase1);</span>
+<span class="fc" id="L171">        purchaseRepository.save(purchase2);</span>
+<span class="fc" id="L172">        purchaseRepository.save(purchase3);</span>
+
+<span class="fc" id="L174">        PurchaseLine purchaseLine1 = new PurchaseLine(</span>
+                null,
+                purchase1,
+                game1,
+<span class="fc" id="L178">                9.99</span>
+        );
+
+<span class="fc" id="L181">        PurchaseLine purchaseLine2 = new PurchaseLine(</span>
+                null,
+                purchase1,
+                game2,
+<span class="fc" id="L185">                4.99</span>
+        );
+
+<span class="fc" id="L188">        PurchaseLine purchaseLine3 = new PurchaseLine(</span>
+                null,
+                purchase2,
+                game1,
+<span class="fc" id="L192">                9.99</span>
+        );
+
+<span class="fc" id="L195">        purchaseLineRepository.save(purchaseLine1);</span>
+<span class="fc" id="L196">        purchaseLineRepository.save(purchaseLine2);</span>
+<span class="fc" id="L197">        purchaseLineRepository.save(purchaseLine3);</span>
+
+
+
+        // --- WISHLIST ---
+<span class="fc" id="L202">        Wishlist wishlist1 = new Wishlist(</span>
+                null,
+                user1,
+                game1
+        );
+
+<span class="fc" id="L208">        Wishlist wishlist2 = new Wishlist(</span>
+                null,
+                user2,
+                game2
+        );
+
+<span class="fc" id="L214">        wishlistRepository.save(wishlist1);</span>
+<span class="fc" id="L215">        wishlistRepository.save(wishlist2);</span>
+
+        // --- AVIS ---
+<span class="fc" id="L218">        Avis avis1 = new Avis(</span>
+                null,
+                user1,
+                game1,
+                &quot;Great game!&quot;,
+<span class="fc" id="L223">                5</span>
+        );
+
+<span class="fc" id="L226">        Avis avis2 = new Avis(</span>
+                null,
+                user2,
+                game1,
+                &quot;I love it!&quot;,
+<span class="fc" id="L231">                4</span>
+        );
+
+<span class="fc" id="L234">        Avis avis3 = new Avis(</span>
+                null,
+                user1,
+                game2,
+                &quot;Not bad&quot;,
+<span class="fc" id="L239">                3</span>
+        );
+
+<span class="fc" id="L242">        avisRepository.save(avis1);</span>
+<span class="fc" id="L243">        avisRepository.save(avis2);</span>
+<span class="fc" id="L244">        avisRepository.save(avis3);</span>
+
+<span class="fc" id="L246">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

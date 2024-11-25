@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AdminUserController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">gamesUP</a> &gt; <a href="index.source.html" class="el_package">com.gamesUP.gamesUP.controller.admin</a> &gt; <span class="el_source">AdminUserController.java</span></div><h1>AdminUserController.java</h1><pre class="source lang-java linenums">package com.gamesUP.gamesUP.controller.admin;
+
+import com.gamesUP.gamesUP.DTO.User.AvisResponseDTO;
+import com.gamesUP.gamesUP.DTO.User.UserDTO;
+import com.gamesUP.gamesUP.DTO.User.UserResponseDTO;
+import com.gamesUP.gamesUP.DTO.User.WishlistResponseDTO;
+import com.gamesUP.gamesUP.Exceptions.EntityAlreadyExistException;
+import com.gamesUP.gamesUP.service.User.AvisService;
+import com.gamesUP.gamesUP.service.User.UserService;
+import com.gamesUP.gamesUP.service.User.WishlistService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping(&quot;/api/admin/users&quot;)
+<span class="fc" id="L18">public class AdminUserController {</span>
+
+    @Autowired
+    private UserService userService;
+
+    @Autowired
+    private WishlistService wishListService;
+
+    @Autowired
+    private AvisService avisService;
+    
+    @GetMapping(&quot;/avis&quot;)
+    public List&lt;AvisResponseDTO&gt; getAllAvis() {
+<span class="fc" id="L31">        return avisService.getAllAvis();</span>
+    }
+
+    @GetMapping(&quot;/avis/{id}&quot;)
+    public AvisResponseDTO getAvisById(@PathVariable Long id) {
+<span class="fc" id="L36">        return avisService.getAvisById(id);</span>
+    }
+
+    @DeleteMapping(&quot;/avis/{id}&quot;)
+    public void deleteAvis(@PathVariable Long id) {
+<span class="fc" id="L41">        avisService.deleteAvis(id);</span>
+<span class="fc" id="L42">    }</span>
+
+    @GetMapping
+    public List&lt;UserResponseDTO&gt; getAllUsers() {
+<span class="fc" id="L46">        return userService.getAllUsers();</span>
+    }
+
+    @GetMapping(&quot;/{id}&quot;)
+    public UserResponseDTO getUserById(@PathVariable Long id) {
+<span class="fc" id="L51">        return userService.getUserById(id);</span>
+    }
+
+    @GetMapping(&quot;/search/email&quot;)
+    public UserResponseDTO getUserByEmail(@RequestParam String email) {
+<span class="fc" id="L56">        return userService.getUserByEmail(email);</span>
+    }
+
+    @GetMapping(&quot;/search/username&quot;)
+    public UserResponseDTO getUserByUsername(@RequestParam String username) {
+<span class="fc" id="L61">        return userService.getUserByName(username);</span>
+    }
+
+    @PostMapping
+    public void addUser(@RequestBody UserDTO userDTO) {
+        try {
+<span class="fc" id="L67">            userService.addUser(userDTO);</span>
+<span class="fc" id="L68">        } catch (Exception e) {</span>
+<span class="fc" id="L69">            throw new EntityAlreadyExistException(&quot;User already exists&quot;);</span>
+<span class="fc" id="L70">        }</span>
+<span class="fc" id="L71">    }</span>
+
+    @DeleteMapping(&quot;/{id}&quot;)
+    public void deleteUser(@PathVariable Long id) {
+<span class="fc" id="L75">        userService.deleteUser(id);</span>
+<span class="fc" id="L76">    }</span>
+
+    @GetMapping(&quot;/wishlists&quot;)
+    public List&lt;WishlistResponseDTO&gt; getAllWishlists() {
+<span class="fc" id="L80">        return wishListService.getAllWishlists();</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>
