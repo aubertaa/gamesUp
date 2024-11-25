@@ -15,6 +15,6 @@ cd '..\Client logged in testsuite\'
 bru run --env localhost --reporter-html ../results_client.html
 cd '..\Admin logged in testsuite\'
 bru run --env localhost --reporter-html ../results_admin.html
-cd '..'
+cd ..
 ```
 HTML reports will be generated in the root directory of tests ("integration_tests")
