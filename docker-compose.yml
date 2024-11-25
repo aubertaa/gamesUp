@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  backend:
+    image: maven:3.9.4-eclipse-temurin-21
+    container_name: spring-boot-backend
+    ports:
+      - "8080:8080" # Maps container port 8080 to host port 8080
+    volumes:
+      - .:/usr/src/app # Mounts the current directory to /usr/src/app
+    working_dir: /usr/src/app
+    command: mvn spring-boot:run # Runs the backend
+    environment:
+      - 'SPRING_PROFILES_ACTIVE=dev'
