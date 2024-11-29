@@ -57,7 +57,6 @@ public class PurchaseLineServiceTests {
         purchaseLine.setId(1L);
         purchaseLine.setPurchase(purchase);
         purchaseLine.setGame(game);
-        purchaseLine.setPrix(29.99);
     }
 
     @Test
@@ -104,7 +103,6 @@ public class PurchaseLineServiceTests {
         PurchaseLineDTO purchaseLineDTO = new PurchaseLineDTO();
         purchaseLineDTO.setPurchaseId(1L);
         purchaseLineDTO.setGameId(1L);
-        purchaseLineDTO.setPrix(29.99);
 
         when(purchaseRepository.findById(1L)).thenReturn(Optional.of(purchase));
         when(gameRepository.findById(1L)).thenReturn(Optional.of(game));
@@ -149,7 +147,6 @@ public class PurchaseLineServiceTests {
         PurchaseLineDTO purchaseLineDTO = new PurchaseLineDTO();
         purchaseLineDTO.setPurchaseId(1L);
         purchaseLineDTO.setGameId(1L);
-        purchaseLineDTO.setPrix(39.99);
 
         when(purchaseLineRepository.findById(1L)).thenReturn(Optional.of(purchaseLine));
         when(purchaseRepository.findById(1L)).thenReturn(Optional.of(purchase));
@@ -160,7 +157,6 @@ public class PurchaseLineServiceTests {
 
         // Assert
         verify(purchaseLineRepository).save(purchaseLine);
-        assertEquals(39.99, purchaseLine.getPrix());
     }
 
     @Test

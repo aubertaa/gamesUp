@@ -24,6 +24,7 @@ public class Game {
     private String nom;
     private String genre;
     private String numEdition;
+    private Float prix;
 
     @ManyToOne
     @JoinColumn(name = "author_id")

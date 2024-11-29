@@ -60,6 +60,7 @@ public class GameService {
         game.setAuthor(author);
         game.setCategory(category);
         game.setPublisher(publisher);
+        game.setPrix(gameDTO.getPrix());
         gameRepository.save(game);
     }
 
@@ -87,6 +88,7 @@ public class GameService {
         game.setAuthor(author);
         game.setCategory(category);
         game.setPublisher(publisher);
+        game.setPrix(gameDTO.getPrix());
         gameRepository.save(game);
     }
 
@@ -107,6 +109,7 @@ public class GameService {
         dto.setAuthorName(game.getAuthor().getName());
         dto.setCategoryType(game.getCategory().getType());
         dto.setPublisherName(game.getPublisher().getName());
+        dto.setPrix(game.getPrix());
         return dto;
     }
 

@@ -51,7 +51,6 @@ public class PurchaseLineService {
                 .orElseThrow(() -> new EntityDontExistException("Game not found: " + purchaseLineDTO.getGameId()));
         purchaseLine.setGame(game);
 
-        purchaseLine.setPrix(purchaseLineDTO.getPrix());
         purchaseLineRepository.save(purchaseLine);
     }
 
@@ -70,7 +69,6 @@ public class PurchaseLineService {
                     .orElseThrow(() -> new EntityDontExistException("Game not found: " + purchaseLineDTO.getGameId()));
             purchaseLine.setGame(game);
 
-            purchaseLine.setPrix(purchaseLineDTO.getPrix());
             purchaseLineRepository.save(purchaseLine);
         }
     }
@@ -88,7 +86,6 @@ public class PurchaseLineService {
         dto.setId(purchaseLine.getId());
         dto.setPurchaseId(purchaseLine.getPurchase().getId());
         dto.setGameId(purchaseLine.getGame().getId());
-        dto.setPrix(purchaseLine.getPrix());
         return dto;
     }
 }

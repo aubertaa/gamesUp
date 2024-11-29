@@ -73,6 +73,7 @@ public class GameServiceTests {
         game1.setAuthor(author);
         game1.setCategory(category);
         game1.setPublisher(publisher);
+        game1.setPrix(10.0f);
 
         game2 = new Game();
         game2.setId(2L);
@@ -82,6 +83,7 @@ public class GameServiceTests {
         game2.setAuthor(author);
         game2.setCategory(category);
         game2.setPublisher(publisher);
+        game2.setPrix(20.0f);
     }
 
     @Test
@@ -106,6 +108,7 @@ public class GameServiceTests {
         gameDTO.setAuthorName("Author One");
         gameDTO.setCategoryType("Category One");
         gameDTO.setPublisherName("Publisher One");
+        gameDTO.setPrix(10.0f);
 
         when(authorRepository.findByName("Author One")).thenReturn(Optional.of(author));
         when(categoryRepository.findByType("Category One")).thenReturn(Optional.of(category));
@@ -165,6 +168,7 @@ public class GameServiceTests {
         gameDTO.setAuthorName("Author One");
         gameDTO.setCategoryType("Category One");
         gameDTO.setPublisherName("Publisher One");
+        gameDTO.setPrix(15.0f);
 
         when(gameRepository.findById(gameId)).thenReturn(Optional.of(game1));
         when(authorRepository.findByName("Author One")).thenReturn(Optional.of(author));
@@ -191,6 +195,7 @@ public class GameServiceTests {
         gameDTO.setAuthorName("Author not found");
         gameDTO.setCategoryType("Category One");
         gameDTO.setPublisherName("Publisher One");
+        gameDTO.setPrix(20.0f);
 
         when(gameRepository.findById(gameId)).thenReturn(Optional.of(game1));
         when(authorRepository.findByName("Author not found")).thenReturn(Optional.empty());
@@ -213,6 +218,7 @@ public class GameServiceTests {
         gameDTO.setAuthorName("Author One");
         gameDTO.setCategoryType("Category not found");
         gameDTO.setPublisherName("Publisher One");
+        gameDTO.setPrix(20.0f);
 
         when(gameRepository.findById(gameId)).thenReturn(Optional.of(game1));
         when(authorRepository.findByName("Author One")).thenReturn(Optional.of(author));
@@ -236,6 +242,7 @@ public class GameServiceTests {
         gameDTO.setAuthorName("Author One");
         gameDTO.setCategoryType("Category One");
         gameDTO.setPublisherName("Publisher not found");
+        gameDTO.setPrix(20.0f);
 
         when(gameRepository.findById(gameId)).thenReturn(Optional.of(game1));
         when(authorRepository.findByName("Author One")).thenReturn(Optional.of(author));
@@ -338,6 +345,7 @@ public class GameServiceTests {
         assertEquals(game1.getId(), result.getId());
         assertEquals(game1.getNom(), result.getNom());
         assertEquals(game1.getPublisher().getName(), result.getPublisherName());
+        assertEquals(game1.getPrix(), result.getPrix());
 
     }
 

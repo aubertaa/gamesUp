@@ -11,4 +11,5 @@ public class GameResponseDTO {
     private String authorName;
     private String categoryType;
     private String publisherName;
+    private Float prix;
 }
