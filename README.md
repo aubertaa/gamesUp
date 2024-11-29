@@ -2,6 +2,7 @@
 
 ## Architecture
 L’architecture est la suivante:
+
 ![img_2.png](img_2.png)
 
 ### Base de données
@@ -24,6 +25,8 @@ Le modèle de la base de données est le suivant :
 - Mise en place de données de test (incluant les comptes de test)
 - Création d'un profil 'dev' avec base de donnée H2 autoprovisionnée pour les tests et la phase de développement
 - Mise en place d'une documentation dynamique OpenAPI au format Swagger
+- Création d'un docker-compose pour lancer l'application (dev)
+- Ajout de la mécanique de recommandations via intégration des appels au backend Python
 
 ## Documentation
 
@@ -32,6 +35,12 @@ Le modèle de la base de données est le suivant :
 - Une documentation dynamique OpenAPI au format Swagger est disponible à l'adresse suivante, une fois l'application démarrée sur votre poste : `http://localhost:8080/swagger-ui.html`
 
 ## Procédure de build / validation
+
+- Créer un réseau docker pour assurer la communication entre les deux backends (Spring et Python) :
+
+```bash
+docker network create gamesup
+```
 
 - Pour déclencher un build en local, il suffit de lancer la commande suivante à la racine du projet:
 

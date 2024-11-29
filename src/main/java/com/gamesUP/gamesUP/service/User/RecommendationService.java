@@ -80,7 +80,7 @@ public class RecommendationService {
         request.setPurchases(purchaseList);
 
         // Define the URL for the recommendation API
-        String url = "http://localhost:8000/recommendations/";
+        String url = "http://python-backend:8000/recommendations/";
 
         // Set the headers
         HttpHeaders headers = new HttpHeaders();

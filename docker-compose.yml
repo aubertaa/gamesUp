@@ -12,3 +12,8 @@ services:
     command: mvn spring-boot:run # Runs the backend
     environment:
       - 'SPRING_PROFILES_ACTIVE=dev'
+    networks:
+      - gamesup
+networks:
+  gamesup:
+    external: true
