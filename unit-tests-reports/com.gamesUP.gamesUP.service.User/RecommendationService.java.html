@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>RecommendationService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">gamesUP</a> &gt; <a href="index.source.html" class="el_package">com.gamesUP.gamesUP.service.User</a> &gt; <span class="el_source">RecommendationService.java</span></div><h1>RecommendationService.java</h1><pre class="source lang-java linenums">package com.gamesUP.gamesUP.service.User;
+
+import com.gamesUP.gamesUP.DTO.User.RecommendationRequest;
+import com.gamesUP.gamesUP.model.Game.Game;
+import com.gamesUP.gamesUP.model.Purchase.Purchase;
+import com.gamesUP.gamesUP.model.Purchase.PurchaseLine;
+import com.gamesUP.gamesUP.repository.Game.GameRepository;
+import com.gamesUP.gamesUP.repository.Purchase.PurchaseLineRepository;
+import com.gamesUP.gamesUP.repository.Purchase.PurchaseRepository;
+import com.gamesUP.gamesUP.repository.User.AvisRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.*;
+import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
+
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+@Service
+public class RecommendationService {
+
+
+<span class="fc" id="L27">    private static final Logger logger = LoggerFactory.getLogger(RecommendationService.class);</span>
+
+
+    @Autowired
+    private PurchaseRepository purchaseRepository;
+
+    @Autowired
+    private PurchaseLineRepository purchaseLineRepository;
+
+    @Autowired
+    private AvisRepository avisRepository;
+
+    @Autowired
+    private GameRepository gameRepository;
+
+    private final RestTemplate restTemplate;
+
+<span class="fc" id="L44">    public RecommendationService(RestTemplate restTemplate) {</span>
+<span class="fc" id="L45">        this.restTemplate = restTemplate;</span>
+<span class="fc" id="L46">    }</span>
+
+    public String getRecommendation(Long userId) {
+
+        // Fetch purchases for the given user from the database
+<span class="nc" id="L51">        List&lt;Purchase&gt; purchases = purchaseRepository.findByUserId(userId);</span>
+
+        // Get game data for each purchase
+<span class="nc" id="L54">        List&lt;RecommendationRequest.Purchase&gt; purchaseList = purchases.stream()</span>
+<span class="nc" id="L55">                .flatMap(purchase -&gt; {</span>
+                    // Fetch PurchaseLine entries for each purchase to get associated games
+<span class="nc" id="L57">                    List&lt;PurchaseLine&gt; purchaseLines = purchaseLineRepository.findByPurchaseId(purchase.getId());</span>
+<span class="nc" id="L58">                    return purchaseLines.stream().map(purchaseLine -&gt; {</span>
+
+                        // Get the game for the given game_id
+<span class="nc" id="L61">                        Game game = gameRepository.findById(purchaseLine.getGame().getId()).orElseThrow(() -&gt; new RuntimeException(&quot;Game not found&quot;));</span>
+
+<span class="nc" id="L63">                        RecommendationRequest.Purchase purchaseObj = new RecommendationRequest.Purchase();</span>
+<span class="nc" id="L64">                        purchaseObj.setGame_id(game.getId());</span>
+
+                        //rating is fetched from Avisrepository
+<span class="nc" id="L67">                        Float rating = avisRepository.findByGameAndUserId(game.getId(), userId);</span>
+<span class="nc" id="L68">                        purchaseObj.setRating(rating);</span>
+
+<span class="nc" id="L70">                        return purchaseObj;</span>
+                    });
+                })
+<span class="nc" id="L73">                .collect(Collectors.toList());</span>
+
+<span class="nc" id="L75">        logger.info(&quot;Fetched purchaseList: {}&quot;, purchaseList);</span>
+
+        // Create the request body for the recommendation API
+<span class="nc" id="L78">        RecommendationRequest request = new RecommendationRequest();</span>
+<span class="nc" id="L79">        request.setUser_id(userId);</span>
+<span class="nc" id="L80">        request.setPurchases(purchaseList);</span>
+
+        // Define the URL for the recommendation API
+<span class="nc" id="L83">        String url = &quot;http://localhost:8000/recommendations/&quot;;</span>
+
+        // Set the headers
+<span class="nc" id="L86">        HttpHeaders headers = new HttpHeaders();</span>
+<span class="nc" id="L87">        headers.setContentType(MediaType.APPLICATION_JSON);</span>
+
+        // Wrap the body and headers into an HttpEntity
+<span class="nc" id="L90">        HttpEntity&lt;RecommendationRequest&gt; entity = new HttpEntity&lt;&gt;(request, headers);</span>
+
+        // Send the POST request to the Python API
+<span class="nc" id="L93">        logger.info(&quot; entity: {}&quot;, entity);</span>
+<span class="nc" id="L94">        ResponseEntity&lt;String&gt; response = restTemplate.exchange(url, HttpMethod.POST, entity, String.class);</span>
+
+        // Return the response body from the Python API
+<span class="nc" id="L97">        logger.info(&quot; response: {}&quot;, response);</span>
+<span class="nc" id="L98">        logger.info(&quot; response.getBody(): {}&quot;, response.getBody());</span>
+<span class="nc" id="L99">        return response.getBody();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>
