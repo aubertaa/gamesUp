@@ -7,6 +7,6 @@ public class AvisDTO {
     private Long userId;
     private Long gameId;
     private String commentaire;
-    private Integer note;
+    private Float note;
 }
 

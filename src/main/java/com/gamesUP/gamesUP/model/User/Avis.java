@@ -29,5 +29,5 @@ public class Avis {
 	private Game game;
 
 	private String commentaire;
-	private Integer note;
+	private Float note;
 }

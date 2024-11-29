@@ -84,6 +84,7 @@ public class InitData implements CommandLineRunner {
                 "Fortnite",
                 "Battle Royale",
                 "3.1",
+                9.99f,
                 author1,
                 category1,
                 publisher1
@@ -94,6 +95,7 @@ public class InitData implements CommandLineRunner {
                 "Portal",
                 "Puzzle",
                 "1",
+                4.99f,
                 author2,
                 category2,
                 publisher2
@@ -174,22 +176,19 @@ public class InitData implements CommandLineRunner {
         PurchaseLine purchaseLine1 = new PurchaseLine(
                 null,
                 purchase1,
-                game1,
-                9.99
+                game1
         );
 
         PurchaseLine purchaseLine2 = new PurchaseLine(
                 null,
                 purchase1,
-                game2,
-                4.99
+                game2
         );
 
         PurchaseLine purchaseLine3 = new PurchaseLine(
                 null,
                 purchase2,
-                game1,
-                9.99
+                game1
         );
 
         purchaseLineRepository.save(purchaseLine1);
@@ -220,7 +219,7 @@ public class InitData implements CommandLineRunner {
                 user1,
                 game1,
                 "Great game!",
-                5
+                5f
         );
 
         Avis avis2 = new Avis(
@@ -228,7 +227,7 @@ public class InitData implements CommandLineRunner {
                 user2,
                 game1,
                 "I love it!",
-                4
+                4f
         );
 
         Avis avis3 = new Avis(
@@ -236,7 +235,7 @@ public class InitData implements CommandLineRunner {
                 user1,
                 game2,
                 "Not bad",
-                3
+                3f
         );
 
         avisRepository.save(avis1);

@@ -8,5 +8,5 @@ public class AvisResponseDTO {
     private Long userId;
     private Long gameId;
     private String commentaire;
-    private Integer note;
+    private Float note;
 }

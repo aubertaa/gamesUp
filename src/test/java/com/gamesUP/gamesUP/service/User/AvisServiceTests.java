@@ -58,7 +58,7 @@ public class AvisServiceTests {
         avis.setUser(user);
         avis.setGame(game);
         avis.setCommentaire("Great game!");
-        avis.setNote(5);
+        avis.setNote(5f);
     }
 
     @Test
@@ -106,7 +106,7 @@ public class AvisServiceTests {
         avisDTO.setUserId(1L);
         avisDTO.setGameId(1L);
         avisDTO.setCommentaire("Great game!");
-        avisDTO.setNote(5);
+        avisDTO.setNote(5f);
 
         when(userRepository.findById(1L)).thenReturn(Optional.of(user));
         when(gameRepository.findById(1L)).thenReturn(Optional.of(game));
@@ -152,7 +152,7 @@ public class AvisServiceTests {
         avisDTO.setUserId(1L);
         avisDTO.setGameId(1L);
         avisDTO.setCommentaire("Updated Comment");
-        avisDTO.setNote(4);
+        avisDTO.setNote(4f);
 
         when(avisRepository.findById(1L)).thenReturn(Optional.of(avis));
         when(userRepository.findById(1L)).thenReturn(Optional.of(user));
